@@ -63,7 +63,7 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--ink);-webkit-box-shadow:0 0
 .ri.on{border-radius:16px;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff}
 .ri:before{content:'';position:absolute;left:-11px;top:50%;width:5px;height:0;border-radius:0 5px 5px 0;background:#fff;transform:translateY(-50%);transition:height .2s}
 .ri.on:before{height:26px}.ri:hover:before{height:12px}.ri.on:hover:before{height:26px}
-.ri img{width:100%;height:100%;border-radius:inherit;object-fit:cover}
+.ri .im{position:absolute;inset:0;border-radius:inherit;overflow:hidden}
 .bd{position:absolute;right:-4px;bottom:-4px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:var(--danger);color:#fff;font-size:12px;font-weight:800;display:grid;place-items:center;border:2px solid var(--p1);animation:badge .3s}
 .rsep{width:30px;height:2px;background:var(--line);border-radius:2px;flex:none}
 .ri.add{color:var(--ok);font-size:26px;background:var(--p2)}.ri.add:hover{background:var(--ok);color:#06210f}
@@ -88,7 +88,8 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--ink);-webkit-box-shadow:0 0
 .ib:hover{background:var(--hov);transform:scale(1.1)}
 
 .av{position:relative;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;flex:none;user-select:none}
-.av img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+.av .im{position:absolute;inset:0;border-radius:inherit;overflow:hidden}
+.av img,.ri img,.bnr img{display:block;user-select:none;-webkit-user-drag:none}
 .dot{position:absolute;right:-1px;bottom:-1px;width:30%;height:30%;min-width:9px;min-height:9px;border-radius:50%;background:#5b6584;border:2.5px solid var(--p1)}
 .dot.on{background:var(--ok)}
 .sq{border-radius:34%!important}.sq img{border-radius:34%}
@@ -114,7 +115,7 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--ink);-webkit-box-shadow:0 0
 #msgs{flex:1;overflow-y:auto;padding:14px 18px 6px;overflow-anchor:none}
 .start{padding:26px 8px 18px;text-align:center;color:var(--mut)}
 .start .e{font-size:44px;display:block;animation:float 3s ease-in-out infinite}
-.msg{display:flex;gap:12px;padding:2px 8px;border-radius:12px;margin-top:14px;content-visibility:auto;contain-intrinsic-size:auto 56px}
+.msg{position:relative;display:flex;gap:12px;padding:2px 8px;border-radius:12px;margin-top:14px;content-visibility:auto;contain-intrinsic-size:auto 56px}
 .msg.c{margin-top:0}.msg.in{animation:slideIn .2s ease-out}
 .msg:hover{background:var(--hov)}
 .msg .l{width:42px;flex:none;display:flex;justify-content:center}
@@ -153,7 +154,7 @@ video.att{cursor:default;width:min(440px,100%)}
 .emo .eg button:hover{background:var(--hov);transform:scale(1.25)}
 
 /* sağ profil paneli */
-.bnr{height:120px;background-size:cover;background-position:center;border-radius:20px 20px 0 0}
+.bnr{position:relative;overflow:hidden;aspect-ratio:3/1;border-radius:20px 20px 0 0}
 #panel .pav{margin:-48px 0 0 16px;width:104px;height:104px;border-radius:50%;background:var(--p1);display:grid;place-items:center}
 #panel .pbody{padding:6px 16px 18px}
 .pn{font-size:21px;font-weight:800;word-break:break-word}
@@ -176,7 +177,7 @@ video.att{cursor:default;width:min(440px,100%)}
 .btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
 .code{display:flex;align-items:center;gap:8px;background:var(--p2);border-radius:12px;padding:8px 12px;font-weight:800;letter-spacing:1px;font-family:ui-monospace,monospace}
 .code span{flex:1}
-.prof .bnr{margin:-10px -20px 0;border-radius:0;height:110px}
+.prof .bnr{margin:-10px -20px 0;border-radius:0}
 .prof .pav{margin:-44px 0 0 2px;width:96px;height:96px;border-radius:50%;background:var(--p1);display:grid;place-items:center}
 .prof .pb{margin:10px 0 14px;padding:12px;background:var(--p2);border-radius:14px;white-space:pre-wrap;word-break:break-word}
 .lb{background:rgba(0,0,0,.88);cursor:zoom-out}.lb img{max-width:92vw;max-height:90vh;border-radius:12px}
@@ -186,6 +187,17 @@ video.att{cursor:default;width:min(440px,100%)}
 #conn{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:#ffb020;color:#3a2600;font-weight:800;padding:8px 16px;border-radius:14px;z-index:90;display:none}
 #conn.on{display:block}
 
+.mdel{display:none;position:absolute;top:4px;right:10px;background:var(--p3);border-radius:10px;padding:3px 8px;font-size:14px;box-shadow:0 4px 14px rgba(0,0,0,.4)}
+.mdel:hover{background:var(--danger)}
+.msg:hover .mdel{display:block}
+@media(hover:none){.mdel{display:block;opacity:.55}}
+.vfail{margin-top:6px;padding:10px 14px;background:var(--p2);border-radius:12px;color:var(--mut);font-size:13px}.vfail a{color:#7fa8ff}
+.crp{position:relative;overflow:hidden;border-radius:14px;background:#000;margin:0 auto 14px;cursor:grab;touch-action:none;user-select:none}
+.crp:active{cursor:grabbing}
+.crp.round:after{content:'';position:absolute;inset:0;border-radius:50%;box-shadow:0 0 0 999px rgba(0,0,0,.55);pointer-events:none}
+.crp-z{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.crp-z input{padding:0;height:6px;accent-color:var(--acc)}
+.upd{position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:95;background:linear-gradient(135deg,var(--acc),var(--acc2));padding:9px 12px 9px 16px;border-radius:14px;font-weight:800;display:flex;gap:12px;align-items:center;box-shadow:0 10px 30px rgba(0,0,0,.5);animation:fadeUp .25s}
 @media(max-width:1100px){#panel{display:none}}
 @media(max-width:760px){
  #app{padding:6px;gap:6px}
@@ -205,7 +217,18 @@ video.att{cursor:default;width:min(440px,100%)}
 <script>
 const WS_URL = 'wss://efeciis.duckdns.org';
 const HTTP_BASE = WS_URL.replace(/^ws/, 'http'); // yükleme ve medya adresi (aynı sunucu)
-const mediaUrl = u => !u ? '' : (u.startsWith('/media/') ? HTTP_BASE + u : u);
+const VER = 4; // server.js'deki CLIENT_VER ile aynı
+const mediaUrl = u => !u ? '' : (u.startsWith('/media/') ? HTTP_BASE + u.split('#')[0] : u);
+// Kırpma bilgisi adresin sonunda: /media/abc.gif#c=x,y,w,h  (resmin oransal bölgesi). GIF'ler de bozulmadan kırpılır.
+function cropImg(u) {
+  const [raw, fr] = String(u).split('#');
+  const m = /^c=([\d.]+),([\d.]+),([\d.]+),([\d.]+)$/.exec(fr || '');
+  const img = h('img', { src: mediaUrl(raw), alt: '', loading: 'lazy', decoding: 'async', draggable: 'false' });
+  const c = m ? m.slice(1, 5).map(Number) : null;
+  if (c && c[2] > 0.01 && c[3] > 0.01) img.style.cssText = `position:absolute;max-width:none;height:auto;width:${100 / c[2]}%;left:${-c[0] / c[2] * 100}%;top:${-c[1] / c[3] * 100}%`;
+  else img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover';
+  return img;
+}
 
 // ---------- yardımcılar ----------
 const $ = s => document.querySelector(s);
@@ -256,7 +279,7 @@ function flush() {
   else if (S.view.t === 'home') { if (d.has('home') && S.view.tab !== 'add') renderHome(); }
   else {
     if (d.has('header')) renderHeader();
-    if (d.has('msgs')) renderMsgs(d.has('fullmsgs'));
+    if (d.has('msgs')) renderMsgs(d.has('fullmsgs'), d.has('keepscroll'));
     if (d.has('panel')) renderPanel();
   }
   if (d.has('gs')) fillGS();
@@ -273,6 +296,7 @@ function handle(m) {
   switch (m.t) {
     case 'ready': {
       token = m.token; localStorage.setItem('efecord_token', token);
+      if (m.ver && m.ver !== VER && !$('.upd')) document.body.append(h('div', { class: 'upd' }, 'Yeni sürüm var', h('button', { class: 'btn alt sm', onclick: () => location.reload() }, 'Yenile')));
       S.me = m.id; S.friends = m.friends; S.incoming = m.incoming; S.outgoing = m.outgoing;
       S.users = {}; m.users.forEach(u => S.users[u.id] = u);
       S.chats = {}; m.chats.forEach(c => S.chats[c.id] = c);
@@ -290,7 +314,7 @@ function handle(m) {
         S.users[u.id] = u;
       });
       mark('rail', 'side', 'header', 'panel', 'gs', 'home');
-      if (visual) mark('msgs', 'fullmsgs');
+      if (visual) mark('msgs', 'fullmsgs', 'keepscroll');
       break;
     }
     case 'friends':
@@ -316,6 +340,12 @@ function handle(m) {
       const viewing = S.view.chat === m.chat;
       if (!viewing && m.msg.a !== S.me && !m.msg.sys) S.unread[m.chat] = (S.unread[m.chat] || 0) + 1;
       mark('rail', 'side'); if (viewing) { mark('msgs'); renderTyping(); }
+      break;
+    }
+    case 'msg_del': {
+      const c = S.chats[m.chat]; if (!c) return;
+      const i = c.msgs.findIndex(x => x.id === m.id); if (i >= 0) c.msgs.splice(i, 1);
+      mark('rail', 'side'); if (S.view.chat === m.chat) mark('msgs', 'fullmsgs', 'keepscroll');
       break;
     }
     case 'typing':
@@ -369,13 +399,14 @@ function showAuth() {
 const safeUrl = u => u && !/["')\\\s]/.test(u);
 function av(u, px = 40, dot = false, square = false) {
   const d = h('div', { class: 'av' + (square ? ' sq' : ''), style: `width:${px}px;height:${px}px;font-size:${Math.round(px * .42)}px` });
-  if (u && u.avatar) d.append(h('img', { src: mediaUrl(u.avatar), alt: '', loading: 'lazy', decoding: 'async' }));
+  if (u && u.avatar) d.append(h('div', { class: 'im' }, cropImg(u.avatar)));
   else { d.style.background = (u && u.color) || '#5b8dff'; d.textContent = ((u && u.name) || '?')[0].toUpperCase(); }
   if (dot) d.append(h('i', { class: 'dot' + (u && u.online ? ' on' : '') }));
   return d;
 }
 function setBanner(el, u) {
-  if (u && u.banner && safeUrl(u.banner)) el.style.backgroundImage = `url("${mediaUrl(u.banner)}")`;
+  el.innerHTML = ''; el.style.background = '';
+  if (u && u.banner && safeUrl(u.banner)) el.append(cropImg(u.banner));
   else el.style.background = `linear-gradient(135deg,${(u && u.color) || '#5b8dff'},#1d2644)`;
 }
 
@@ -395,31 +426,72 @@ function upload(file, onprog) {
     x.send(file);
   });
 }
-// png/jpeg'i istenen boyuta kırp-küçült; gif/webp animasyon bozulmasın diye olduğu gibi gider
-function prep(file, w, hh) {
-  if (!/^image\/(png|jpeg)$/.test(file.type)) return Promise.resolve(file);
-  return new Promise((res, rej) => {
-    const img = new Image(), url = URL.createObjectURL(file);
-    img.onload = () => {
-      const c = document.createElement('canvas'); c.width = w; c.height = hh;
-      const sc = Math.max(w / img.width, hh / img.height), dw = img.width * sc, dh = img.height * sc;
-      c.getContext('2d').drawImage(img, (w - dw) / 2, (hh - dh) / 2, dw, dh);
-      URL.revokeObjectURL(url);
-      c.toBlob(b => b ? res(b) : rej(new Error('Resim okunamadı')), file.type, .9);
-    };
-    img.onerror = () => rej(new Error('Resim okunamadı'));
-    img.src = url;
+// Kırpma penceresi: sürükle + yakınlaştır. Sabit resimler kırpılıp küçültülür, GIF/WebP animasyon bozulmasın diye olduğu gibi yüklenip kırpma bölgesi kaydedilir.
+function openCropper(file, A, outW, outH, cb) {
+  const url = URL.createObjectURL(file);
+  const FW = Math.max(180, A >= 2 ? Math.min(420, innerWidth - 90) : Math.min(320, innerWidth - 90)), FH = Math.round(FW / A);
+  const frame = h('div', { class: 'crp' + (A === 1 ? ' round' : ''), style: `width:${FW}px;height:${FH}px` });
+  const zoom = h('input', { type: 'range', min: 1, max: 4, step: 0.01, value: 1 });
+  const img = new Image();
+  let ar = 1, z = 1, x = 0, y = 0, ov;
+  const dims = () => { const w1 = ar > A ? A / ar : 1, h1 = ar > A ? 1 : ar / A; return { w: w1 / z, h: h1 / z }; };
+  const draw = () => {
+    const { w, h: hh } = dims();
+    x = Math.min(Math.max(x, 0), 1 - w); y = Math.min(Math.max(y, 0), 1 - hh);
+    img.style.cssText = `position:absolute;max-width:none;height:auto;pointer-events:none;width:${100 / w}%;left:${-x / w * 100}%;top:${-y / hh * 100}%`;
+  };
+  const setZoom = v => {
+    const o = dims(), cx = x + o.w / 2, cy = y + o.h / 2;
+    z = Math.min(4, Math.max(1, v)); zoom.value = z;
+    const n = dims(); x = cx - n.w / 2; y = cy - n.h / 2; draw();
+  };
+  zoom.addEventListener('input', () => setZoom(+zoom.value));
+  frame.addEventListener('wheel', e => { e.preventDefault(); setZoom(z + (e.deltaY < 0 ? .12 : -.12)); }, { passive: false });
+  let drag = null;
+  frame.addEventListener('pointerdown', e => { drag = { px: e.clientX, py: e.clientY }; frame.setPointerCapture(e.pointerId); });
+  frame.addEventListener('pointermove', e => {
+    if (!drag) return;
+    const { w, h: hh } = dims();
+    x -= (e.clientX - drag.px) / FW * w; y -= (e.clientY - drag.py) / FH * hh;
+    drag = { px: e.clientX, py: e.clientY }; draw();
   });
+  const end = () => { drag = null; };
+  frame.addEventListener('pointerup', end); frame.addEventListener('pointercancel', end);
+  img.onload = () => {
+    ar = img.naturalWidth / img.naturalHeight;
+    const d = dims(); x = (1 - d.w) / 2; y = (1 - d.h) / 2; draw(); frame.append(img);
+  };
+  img.onerror = () => { toast('Resim okunamadı', 'err'); if (ov) ov.remove(); };
+  const ok = h('button', { class: 'btn' }, 'Kırp ve yükle');
+  ok.onclick = async () => {
+    ok.disabled = true; ok.textContent = 'Yükleniyor…';
+    try {
+      const { w, h: hh } = dims(); let blob = file;
+      const stat = /^image\/(png|jpeg)$/.test(file.type);
+      if (stat) {
+        const c = document.createElement('canvas'); c.width = outW; c.height = outH;
+        c.getContext('2d').drawImage(img, x * img.naturalWidth, y * img.naturalHeight, w * img.naturalWidth, hh * img.naturalHeight, 0, 0, outW, outH);
+        blob = await new Promise((res, rej) => c.toBlob(b => b ? res(b) : rej(new Error('Resim işlenemedi')), file.type, .92));
+      }
+      const j = await upload(blob);
+      cb(stat ? j.url : `${j.url}#c=${[x, y, w, hh].map(n => n.toFixed(4)).join(',')}`);
+      URL.revokeObjectURL(url); ov.remove();
+    } catch (e) { toast(e.message, 'err'); ok.disabled = false; ok.textContent = 'Kırp ve yükle'; }
+  };
+  ov = modal(A === 1 ? 'Resmi kırp' : 'Banner’ı kırp', h('div', {},
+    frame, h('div', { class: 'crp-z' }, '🔍', zoom),
+    h('p', { class: 'hint', style: 'margin:0 0 12px' }, 'Sürükleyerek konumlandır, kaydırıcı veya fare tekeriyle yakınlaştır.'),
+    h('div', { class: 'btns' }, ok, h('button', { class: 'btn alt', onclick: () => { URL.revokeObjectURL(url); ov.remove(); } }, 'Vazgeç'))));
+  img.src = url;
 }
-function fileBtn(label, cb, w, hh) {
+function fileBtn(label, cb, A, outW, outH) {
   const inp = h('input', {
     type: 'file', accept: 'image/*', style: 'display:none',
-    onchange: async () => {
+    onchange: () => {
       const f = inp.files[0]; inp.value = ''; if (!f) return;
-      if (!/^image\//.test(f.type)) return toast('Sadece resim / GIF seçebilirsin', 'err');
+      if (!/^image\/(png|jpeg|gif|webp)$/.test(f.type)) return toast('PNG, JPG, GIF veya WebP seç', 'err');
       if (f.size > 8 * 1048576) return toast('En fazla 8 MB olabilir', 'err');
-      try { toast('Yükleniyor…'); const j = await upload(await prep(f, w, hh)); cb(j.url); }
-      catch (e) { toast(e.message, 'err'); }
+      openCropper(f, A, outW, outH, cb);
     }
   });
   return h('span', {}, inp, h('button', { class: 'btn alt sm', type: 'button', onclick: () => inp.click() }, label));
@@ -432,11 +504,11 @@ async function sendFile(file) {
   if (isI && file.size > 8 * 1048576) return toast('Resim en fazla 8 MB olabilir', 'err');
   if (S.uploading) return toast('Önce devam eden yüklemenin bitmesini bekle', 'err');
   S.uploading = true;
-  const bar = h('i'), box = h('div', { class: 'upl' }, (isV ? '🎬 ' : '🖼️ ') + file.name, h('div', { class: 'pbar' }, bar));
+  const bar = h('i'), lab = h('span', {}, (isV ? '🎬 ' : '🖼️ ') + file.name), box = h('div', { class: 'upl' }, lab, h('div', { class: 'pbar' }, bar));
   const main = $('#main'), comp = main && main.querySelector('.comp');
   if (comp) main.insertBefore(box, comp);
   try {
-    const j = await upload(file, p => { bar.style.width = Math.round(p * 100) + '%'; });
+    const j = await upload(file, p => { bar.style.width = Math.round(p * 100) + '%'; if (p >= 1 && isV) lab.textContent = '🎬 İşleniyor… (video herkesin oynatabileceği biçime çevriliyor)'; });
     const ta = main && main.querySelector('.comp textarea');
     const text = ta && S.view.chat === c.id ? ta.value.trim() : '';
     if (text) { ta.value = ''; S.drafts[c.id] = ''; }
@@ -482,7 +554,7 @@ function renderRail() {
   r.append(ri('E', 'Ana sayfa', inDm, dmUnread + S.incoming.length, () => go({ t: 'home', tab: 'online', chat: null })));
   r.append(h('div', { class: 'rsep' }));
   Object.values(S.chats).filter(c => c.type === 'group').sort((a, b) => a.name.localeCompare(b.name, 'tr')).forEach(c => {
-    const icon = c.icon ? h('img', { src: mediaUrl(c.icon), alt: '', decoding: 'async' }) : (c.name[0] || '?').toUpperCase();
+    const icon = c.icon ? h('div', { class: 'im' }, cropImg(c.icon)) : (c.name[0] || '?').toUpperCase();
     r.append(ri(icon, c.name, S.view.chat === c.id, S.unread[c.id] || 0, () => go({ t: 'chat', chat: c.id })));
   });
   r.append(ri('＋', 'Grup oluştur / katıl', false, 0, openPlus, 'add'));
@@ -583,15 +655,18 @@ function renderHeader() {
 const EMOJI_ONLY = /^(?:\p{Extended_Pictographic}|\p{Emoji_Modifier}|\u200d|\ufe0f|\s)+$/u;
 const rich = text => text.split(/(https?:\/\/[^\s<]+)/g).map((p, i) => i % 2 ? h('a', { href: p, target: '_blank', rel: 'noopener noreferrer' }, p) : p);
 
-function msgNode(m, prev, box, stick, animate) {
+function msgNode(m, prev, box, stick, animate, c) {
   const u = S.users[m.a], cont = prev && !prev.sys && prev.a === m.a && m.ts - prev.ts < 300000;
   const big = m.t && m.t.length < 30 && EMOJI_ONLY.test(m.t);
   const keep = () => { if (stick) box.scrollTop = box.scrollHeight; };
   let att = null;
   if (m.f) {
     const src = mediaUrl(m.f.url);
-    if (m.f.k === 'video') { att = h('video', { class: 'att', src, controls: true, preload: 'metadata', playsinline: true }); att.addEventListener('loadedmetadata', keep); }
-    else { att = h('img', { class: 'att', src, loading: 'lazy', decoding: 'async', alt: '', onclick: () => lightbox(src) }); att.addEventListener('load', keep); }
+    if (m.f.k === 'video') {
+      att = h('video', { class: 'att', src: src + '#t=0.1', controls: true, preload: 'metadata', playsinline: true });
+      att.addEventListener('loadedmetadata', keep);
+      att.addEventListener('error', () => att.replaceWith(h('div', { class: 'vfail' }, '🎬 Bu cihaz videoyu oynatamadı. ', h('a', { href: src, target: '_blank', rel: 'noopener noreferrer' }, 'İndir / yeni sekmede aç'))));
+    } else { att = h('img', { class: 'att', src, loading: 'lazy', decoding: 'async', alt: '', onclick: () => lightbox(src) }); att.addEventListener('load', keep); }
   }
   const left = cont
     ? h('div', { class: 'l' }, h('span', { class: 'ts' }, new Date(m.ts).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })))
@@ -599,16 +674,19 @@ function msgNode(m, prev, box, stick, animate) {
   const right = h('div', { class: 'r' },
     cont ? null : h('div', { class: 'top' }, h('b', { style: `color:${(u && u.color) || '#7fa8ff'}`, onclick: () => showProfile(m.a) }, u ? u.name : 'Bilinmeyen'), h('time', {}, fmt(m.ts))),
     m.t ? h('div', { class: 'txt' + (big ? ' big' : '') }, rich(m.t)) : null, att);
-  return h('div', { class: 'msg' + (cont ? ' c' : '') + (animate ? ' in' : '') }, left, right);
+  const canDel = m.a === S.me || (c.type === 'group' && c.owner === S.me);
+  return h('div', { class: 'msg' + (cont ? ' c' : '') + (animate ? ' in' : ''), 'data-id': m.id }, left, right,
+    canDel ? h('button', { class: 'mdel', title: 'Mesajı sil', onclick: () => { if (confirm('Bu mesaj herkes için silinsin mi?')) send({ t: 'delete_msg', chat: c.id, id: m.id }); } }, '🗑️') : null);
 }
-function renderMsgs(full) {
+function renderMsgs(full, keep) {
   const box = $('#msgs'), c = S.chats[S.view.chat]; if (!box || !c) return;
   let start = 0;
   if (!full && R.chat === c.id && R.lastId) {
     let i = c.msgs.length - 1; while (i >= 0 && c.msgs[i].id !== R.lastId) i--;
     if (i < 0) full = true; else start = i + 1;
   } else full = true;
-  const near = full || box.scrollHeight - box.scrollTop - box.clientHeight < 160;
+  const st = box.scrollTop;
+  const near = keep ? false : (full || box.scrollHeight - box.scrollTop - box.clientHeight < 160);
   if (full) {
     box.innerHTML = ''; R.prev = null;
     box.append(c.type === 'dm'
@@ -619,11 +697,11 @@ function renderMsgs(full) {
   for (let i = start; i < c.msgs.length; i++) {
     const m = c.msgs[i];
     if (m.sys) { frag.append(h('div', { class: 'sys' }, m.t)); R.prev = m; continue; }
-    frag.append(msgNode(m, R.prev, box, near, !full)); R.prev = m;
+    frag.append(msgNode(m, R.prev, box, near, !full, c)); R.prev = m;
   }
   box.append(frag);
   R.chat = c.id; R.lastId = c.msgs.length ? c.msgs[c.msgs.length - 1].id : null;
-  if (near) box.scrollTop = box.scrollHeight;
+  if (near) box.scrollTop = box.scrollHeight; else if (keep && full) box.scrollTop = st;
 }
 function renderTyping() {
   const el = $('#typ'); if (!el) return;
@@ -749,7 +827,7 @@ function openPlus() {
 
 function openSettings() {
   const u = S.users[S.me]; let pa, pb; // undefined: değişmedi, '': kaldır
-  const prevB = h('div', { class: 'bnr', style: 'height:110px;border-radius:16px' }), prevA = h('div', { class: 'center' });
+  const prevB = h('div', { class: 'bnr', style: 'border-radius:16px' }), prevA = h('div', { class: 'center' });
   const col = h('input', { type: 'color', value: u.color, style: 'height:44px;padding:4px', oninput: () => draw() });
   const draw = () => {
     setBanner(prevB, { banner: pb === undefined ? u.banner : pb, color: col.value });
@@ -759,9 +837,9 @@ function openSettings() {
   const bio = h('textarea', { rows: 3, maxlength: 190, placeholder: 'Hakkında bir şeyler yaz…' }); bio.value = u.bio || '';
   let ov;
   const body = h('div', {}, prevB,
-    h('div', { class: 'btns', style: 'margin-bottom:12px' }, fileBtn('🎞️ Banner (GIF olur)', d => { pb = d; draw(); }, 1200, 400), h('button', { class: 'btn alt sm', onclick: () => { pb = ''; draw(); } }, 'Banner kaldır')),
+    h('div', { class: 'btns', style: 'margin-bottom:12px' }, fileBtn('🎞️ Banner (GIF olur)', d => { pb = d; draw(); }, 3, 1200, 400), h('button', { class: 'btn alt sm', onclick: () => { pb = ''; draw(); } }, 'Banner kaldır')),
     prevA,
-    h('div', { class: 'btns', style: 'justify-content:center;margin-bottom:10px' }, fileBtn('🖼️ Profil resmi / GIF', d => { pa = d; draw(); }, 512, 512), h('button', { class: 'btn alt sm', onclick: () => { pa = ''; draw(); } }, 'Kaldır')),
+    h('div', { class: 'btns', style: 'justify-content:center;margin-bottom:10px' }, fileBtn('🖼️ Profil resmi / GIF', d => { pa = d; draw(); }, 1, 512, 512), h('button', { class: 'btn alt sm', onclick: () => { pa = ''; draw(); } }, 'Kaldır')),
     h('h4', {}, 'Kullanıcı adı (etiketin: #' + u.tag + ')'), nm, h('h4', {}, 'Hakkında'), bio, h('h4', {}, 'Renk (resim yoksa kullanılır)'), col,
     h('div', { class: 'btns' },
       h('button', { class: 'btn', onclick: () => { const o = { t: 'profile', name: nm.value, bio: bio.value, color: col.value }; if (pa !== undefined) o.avatar = pa; if (pb !== undefined) o.banner = pb; send(o); ov.remove(); } }, 'Kaydet'),
@@ -801,7 +879,7 @@ function fillGS() {
   nm.addEventListener('keydown', e => { if (e.key === 'Enter') rename(); });
   body.append(
     h('div', { class: 'center' }, av({ name: c.name, avatar: c.icon, color: '#5b8dff' }, 92, false, true),
-      h('div', { class: 'btns' }, fileBtn('🖼️ Resim / GIF', url => send({ t: 'group_icon', chat: id, icon: url }), 512, 512),
+      h('div', { class: 'btns' }, fileBtn('🖼️ Resim / GIF', url => send({ t: 'group_icon', chat: id, icon: url }), 1, 512, 512),
         c.icon ? h('button', { class: 'btn alt sm', onclick: () => send({ t: 'group_icon', chat: id, icon: '' }) }, 'Kaldır') : null)),
     h('h4', {}, 'Grup adı'), nm, h('button', { class: 'btn sm', onclick: rename }, 'Adı değiştir'),
     h('h4', {}, 'Davet kodu'),
