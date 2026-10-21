@@ -3,114 +3,120 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
 <title>Efecord</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☁️</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2230%22 fill=%22%235b8dff%22/><text x=%2250%22 y=%2272%22 font-size=%2262%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Arial%22 font-weight=%22bold%22>E</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Baloo+2:wght@700;800&display=swap">
 <style>
-:root{--ink:#0e2540;--mut:#5b7694;--acc:#2b8cff;--acc2:#1769d6;--glass:rgba(255,255,255,.66);--line:rgba(25,85,160,.14);--danger:#e5484d;--ok:#22b573}
+:root{--bg:#070a13;--p1:#0e1322;--p2:#151c32;--p3:#1d2644;--line:rgba(255,255,255,.07);--ink:#e9eefc;--mut:#8792b3;--acc:#5b8dff;--acc2:#8a63ff;--ok:#2fd08a;--danger:#ff5a66;--hov:rgba(255,255,255,.055);--sel:rgba(91,141,255,.2)}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
-body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;color:var(--ink);background:linear-gradient(180deg,#4fb0ff 0%,#8fd3ff 50%,#e4f5ff 100%);overflow:hidden;font-size:15px}
+body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;color:var(--ink);background:var(--bg);overflow:hidden;font-size:15px;color-scheme:dark}
 button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
-input,textarea{font:inherit;color:var(--ink);-webkit-text-fill-color:var(--ink);background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;outline:none;width:100%;caret-color:var(--acc)}
-input::placeholder,textarea::placeholder{color:#8aa3bd;-webkit-text-fill-color:#8aa3bd}
-input:focus,textarea:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(43,140,255,.18)}
-input:-webkit-autofill{-webkit-text-fill-color:var(--ink);-webkit-box-shadow:0 0 0 40px #fff inset}
-::-webkit-scrollbar{width:8px}::-webkit-scrollbar-thumb{background:rgba(40,110,190,.28);border-radius:8px}
+input,textarea{font:inherit;color:var(--ink);-webkit-text-fill-color:var(--ink);background:var(--p2);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;outline:none;width:100%;caret-color:var(--acc);transition:border-color .15s,box-shadow .15s}
+input::placeholder,textarea::placeholder{color:#66719a;-webkit-text-fill-color:#66719a}
+input:focus,textarea:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(91,141,255,.2)}
+input:-webkit-autofill{-webkit-text-fill-color:var(--ink);-webkit-box-shadow:0 0 0 40px var(--p2) inset}
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.13);border-radius:8px}::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.22)}
 
-/* gökyüzü */
-.sky{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-.cloud{position:absolute;left:-320px;background:#fff;border-radius:100px;opacity:.85;filter:blur(1.5px);animation:drift linear infinite;transform:scale(var(--s,1))}
-.cloud:before,.cloud:after{content:'';position:absolute;background:#fff;border-radius:50%}
-.cloud:before{width:70px;height:70px;left:28px;top:-34px}
-.cloud:after{width:96px;height:96px;left:82px;top:-48px}
-@keyframes drift{to{left:110%}}
-@media (prefers-reduced-motion:reduce){.cloud{animation:none;left:20%}}
+@keyframes pop{from{transform:scale(.92);opacity:0}}
+@keyframes fadeUp{from{transform:translateY(8px);opacity:0}}
+@keyframes slideIn{from{transform:translateY(10px);opacity:0}}
+@keyframes shimmer{to{background-position:200% 0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes bounce{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-4px);opacity:1}}
+@keyframes badge{from{transform:scale(0)}60%{transform:scale(1.25)}}
+@keyframes float{50%{transform:translateY(-6px)}}
 
-/* giriş */
-#root{position:relative;z-index:1;height:100%}
-.authwrap{height:100%;display:grid;place-items:center;padding:20px}
-.auth{width:min(420px,100%);background:var(--glass);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.8);border-radius:28px;padding:34px 30px;box-shadow:0 20px 60px rgba(20,90,170,.25)}
-.logo{font-family:'Baloo 2',sans-serif;font-weight:800;font-size:44px;line-height:1;color:var(--acc2);text-align:center;letter-spacing:-1px}
-.logo small{display:block;font:600 14px 'Nunito';color:var(--mut);letter-spacing:0;margin-top:6px}
-.seg{display:flex;background:rgba(43,140,255,.12);border-radius:14px;padding:4px;margin:22px 0 16px}
-.seg button{flex:1;padding:9px;border-radius:11px;font-weight:700;color:var(--mut)}
-.seg button.on{background:#fff;color:var(--acc2);box-shadow:0 2px 8px rgba(20,90,170,.15)}
+/* giriş ekranı */
+#root{position:relative;height:100%}
+.authwrap{position:relative;height:100%;display:grid;place-items:center;padding:20px;overflow:hidden}
+.aur{position:absolute;inset:-40%;background:radial-gradient(circle at 30% 35%,rgba(91,141,255,.45),transparent 38%),radial-gradient(circle at 70% 60%,rgba(138,99,255,.4),transparent 36%),radial-gradient(circle at 50% 85%,rgba(47,208,200,.22),transparent 34%);animation:spin 40s linear infinite;will-change:transform}
+.auth{position:relative;width:min(420px,100%);background:rgba(14,19,34,.92);border:1px solid var(--line);border-radius:28px;padding:34px 30px;box-shadow:0 30px 80px rgba(0,0,0,.55);animation:pop .35s cubic-bezier(.2,.9,.3,1.2)}
+.logo{font-family:'Baloo 2',sans-serif;font-weight:800;font-size:46px;line-height:1;text-align:center;letter-spacing:-1px;background:linear-gradient(90deg,#5b8dff,#b28cff,#37e0d2,#5b8dff);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:shimmer 6s linear infinite}
+.logo small{display:block;font:600 14px 'Nunito';color:var(--mut);-webkit-text-fill-color:var(--mut);letter-spacing:0;margin-top:8px}
+.seg{display:flex;background:var(--p2);border-radius:14px;padding:4px;margin:22px 0 16px}
+.seg button{flex:1;padding:9px;border-radius:11px;font-weight:700;color:var(--mut);transition:all .2s}
+.seg button.on{background:var(--p3);color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.35)}
 .auth input{margin-bottom:10px}
 .pwrow{position:relative}.pwrow input{padding-right:44px}
-.eye{position:absolute;right:6px;top:5px;width:34px;height:34px;border-radius:10px;font-size:16px}
-.btn{background:linear-gradient(180deg,#4aa3ff,#2b8cff);color:#fff;font-weight:800;border-radius:13px;padding:11px 18px;box-shadow:0 4px 14px rgba(43,140,255,.35);transition:transform .12s,filter .12s}
-.btn:hover{filter:brightness(1.06)}.btn:active{transform:scale(.97)}
-.btn.alt{background:#fff;color:var(--acc2);box-shadow:inset 0 0 0 1.5px var(--line);}
-.btn.danger{background:linear-gradient(180deg,#f06a6e,#e5484d);box-shadow:0 4px 14px rgba(229,72,77,.3)}
+.eye{position:absolute;right:6px;top:5px;width:34px;height:34px;border-radius:10px;font-size:16px;opacity:.8}
+.eye:hover{background:var(--hov)}
+.btn{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;font-weight:800;border-radius:13px;padding:11px 18px;box-shadow:0 6px 18px rgba(91,141,255,.3);transition:transform .15s,filter .15s,box-shadow .15s}
+.btn:hover{filter:brightness(1.12);transform:translateY(-1px);box-shadow:0 8px 22px rgba(91,141,255,.4)}.btn:active{transform:scale(.96)}
+.btn.alt{background:var(--p3);color:var(--ink);box-shadow:none}.btn.alt:hover{background:#26325a}
+.btn.danger{background:linear-gradient(135deg,#ff6a74,#e5424f);box-shadow:0 6px 18px rgba(255,90,102,.25)}
 .btn.sm{padding:6px 12px;border-radius:10px;font-size:13px}
 .btn:disabled{opacity:.6;cursor:wait}
 .auth .btn{width:100%;margin-top:4px;padding:13px}
 .amsg{min-height:20px;color:var(--danger);font-weight:700;font-size:13px;margin:2px 2px 6px}
 .hint{color:var(--mut);font-size:13px;text-align:center;margin-top:12px}
 
-/* uygulama */
-#app{position:relative;z-index:1;display:flex;height:100%;padding:12px;gap:10px}
-#rail{width:72px;flex:none;display:flex;flex-direction:column;align-items:center;gap:10px;padding:12px 0;background:linear-gradient(180deg,#2c86ea,#59b3ff);border-radius:24px;box-shadow:0 10px 30px rgba(20,90,170,.3);overflow-y:auto;scrollbar-width:none}
+/* uygulama düzeni */
+#app{display:flex;height:100%;padding:8px;gap:8px}
+.pn1{background:var(--p1);border:1px solid var(--line);border-radius:20px}
+#rail{width:70px;flex:none;display:flex;flex-direction:column;align-items:center;gap:10px;padding:12px 0;overflow-y:auto;scrollbar-width:none}
 #rail::-webkit-scrollbar{display:none}
-.ri{position:relative;width:48px;height:48px;flex:none;border-radius:50%;background:rgba(255,255,255,.22);color:#fff;display:grid;place-items:center;font-size:22px;font-weight:800;overflow:visible;transition:border-radius .18s,background .18s,transform .18s}
-.ri:hover{border-radius:16px;background:rgba(255,255,255,.4)}
-.ri.on{border-radius:16px;background:#fff;color:var(--acc2)}
-.ri.on:before{content:'';position:absolute;left:-12px;top:12px;width:5px;height:24px;border-radius:0 5px 5px 0;background:#fff}
+.ri{position:relative;width:48px;height:48px;flex:none;border-radius:50%;background:var(--p3);color:var(--ink);display:grid;place-items:center;font-size:20px;font-weight:800;transition:border-radius .2s,background .2s,transform .2s}
+.ri:hover{border-radius:16px;background:#2a3768;transform:translateY(-2px)}
+.ri.on{border-radius:16px;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff}
+.ri:before{content:'';position:absolute;left:-11px;top:50%;width:5px;height:0;border-radius:0 5px 5px 0;background:#fff;transform:translateY(-50%);transition:height .2s}
+.ri.on:before{height:26px}.ri:hover:before{height:12px}.ri.on:hover:before{height:26px}
 .ri img{width:100%;height:100%;border-radius:inherit;object-fit:cover}
-.ri .bd,.bd{position:absolute;right:-4px;bottom:-4px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:var(--danger);color:#fff;font-size:12px;font-weight:800;display:grid;place-items:center;border:2px solid #fff}
-.rsep{width:32px;height:2px;background:rgba(255,255,255,.4);border-radius:2px;flex:none}
-.ri.add{background:rgba(255,255,255,.18);font-size:26px}
-#side{width:256px;flex:none;display:flex;flex-direction:column;background:var(--glass);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.8);border-radius:24px;overflow:hidden}
-#main{flex:1;min-width:0;display:flex;flex-direction:column;background:rgba(255,255,255,.78);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.8);border-radius:24px;overflow:hidden;position:relative}
-.sh{padding:16px 16px 10px;font-family:'Baloo 2';font-weight:800;font-size:22px;color:var(--acc2);display:flex;align-items:center;gap:8px;min-height:56px}
+.bd{position:absolute;right:-4px;bottom:-4px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:var(--danger);color:#fff;font-size:12px;font-weight:800;display:grid;place-items:center;border:2px solid var(--p1);animation:badge .3s}
+.rsep{width:30px;height:2px;background:var(--line);border-radius:2px;flex:none}
+.ri.add{color:var(--ok);font-size:26px;background:var(--p2)}.ri.add:hover{background:var(--ok);color:#06210f}
+#side{width:250px;flex:none;display:flex;flex-direction:column;overflow:hidden}
+#main{flex:1;min-width:0;display:flex;flex-direction:column;overflow:hidden;position:relative}
+#main.vin{animation:fadeUp .22s ease-out}
+#panel{width:300px;flex:none;overflow-y:auto;animation:pop .22s ease-out}
+#panel.hide{display:none}
+.sh{padding:16px 16px 10px;font-family:'Baloo 2';font-weight:800;font-size:21px;display:flex;align-items:center;gap:8px;min-height:56px}
 .sh .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer}
 .sl{flex:1;overflow-y:auto;padding:4px 10px}
 .lbl{font-weight:800;font-size:12.5px;color:var(--mut);padding:12px 8px 6px}
-.it{display:flex;align-items:center;gap:10px;padding:7px 9px;border-radius:13px;cursor:pointer;position:relative;transition:background .12s}
-.it:hover{background:rgba(43,140,255,.1)}.it.on{background:rgba(43,140,255,.18);font-weight:700}
+.it{display:flex;align-items:center;gap:10px;padding:7px 9px;border-radius:13px;cursor:pointer;transition:background .15s,transform .15s}
+.it:hover{background:var(--hov);transform:translateX(3px)}.it.on{background:var(--sel);font-weight:700}
 .it .t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .it .bd{position:static;border:0}
-.me{display:flex;align-items:center;gap:10px;padding:10px 12px;margin:8px;border-radius:18px;background:rgba(255,255,255,.7);border:1px solid var(--line)}
+.me{display:flex;align-items:center;gap:10px;padding:10px 12px;margin:8px;border-radius:16px;background:var(--p2)}
 .me .who{flex:1;min-width:0;cursor:pointer;line-height:1.2}
 .me .who b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .me .who span{font-size:12.5px;color:var(--mut)}
-.ib{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;font-size:17px;flex:none}
-.ib:hover{background:rgba(43,140,255,.14)}
+.ib{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;font-size:17px;flex:none;transition:background .15s,transform .15s}
+.ib:hover{background:var(--hov);transform:scale(1.1)}
 
 .av{position:relative;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;flex:none;user-select:none}
 .av img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
-.dot{position:absolute;right:-1px;bottom:-1px;width:30%;height:30%;min-width:9px;min-height:9px;border-radius:50%;background:#a9b9cb;border:2px solid #fff}
+.dot{position:absolute;right:-1px;bottom:-1px;width:30%;height:30%;min-width:9px;min-height:9px;border-radius:50%;background:#5b6584;border:2.5px solid var(--p1)}
 .dot.on{background:var(--ok)}
 .sq{border-radius:34%!important}.sq img{border-radius:34%}
 
 .hd{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid var(--line);min-height:62px;flex:none}
 .hd b{font-size:17px;font-weight:800}.hd .sub{color:var(--mut);font-size:13px}
-.hd .grow{flex:1;min-width:0}
-.hd .tt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hd .grow{flex:1;min-width:0}.hd .tt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .burger{display:none;font-size:20px}
 .tabs{display:flex;gap:6px;flex-wrap:wrap}
-.tab{padding:7px 13px;border-radius:11px;font-weight:700;color:var(--mut)}
-.tab:hover{background:rgba(43,140,255,.1)}.tab.on{background:rgba(43,140,255,.18);color:var(--acc2)}
-.tab.go{background:var(--ok);color:#fff}.tab.go.on{background:#17a068;color:#fff}
+.tab{padding:7px 13px;border-radius:11px;font-weight:700;color:var(--mut);transition:background .15s,color .15s}
+.tab:hover{background:var(--hov);color:var(--ink)}.tab.on{background:var(--sel);color:#fff}
+.tab.go{background:var(--ok);color:#052013}.tab.go.on{background:#26b878}
 .body{flex:1;overflow-y:auto;padding:16px 18px}
-.row{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:16px;cursor:pointer;border-top:1px solid var(--line)}
-.row:first-child{border-top:0}
-.row:hover{background:rgba(43,140,255,.08)}
+.row{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:16px;cursor:pointer;border-top:1px solid var(--line);transition:background .15s}
+.row:first-child{border-top:0}.row:hover{background:var(--hov)}
 .row .nm{flex:1;min-width:0}.row .nm small{display:block;color:var(--mut);font-size:12.5px}
 .empty{text-align:center;color:var(--mut);padding:50px 20px;line-height:1.6}
-.empty .e{font-size:54px;display:block;margin-bottom:6px}
+.empty .e{font-size:54px;display:block;margin-bottom:6px;animation:float 3s ease-in-out infinite}
 .tg{color:var(--mut);font-weight:600;margin-left:1px}
 .addbox{display:flex;gap:8px;margin-top:10px}
 
 /* mesajlar */
-#msgs{flex:1;overflow-y:auto;padding:14px 18px 6px}
+#msgs{flex:1;overflow-y:auto;padding:14px 18px 6px;overflow-anchor:none}
 .start{padding:26px 8px 18px;text-align:center;color:var(--mut)}
-.start .e{font-size:44px;display:block}
-.msg{display:flex;gap:12px;padding:2px 8px;border-radius:12px;margin-top:14px}
-.msg.c{margin-top:0}
-.msg:hover{background:rgba(43,140,255,.06)}
+.start .e{font-size:44px;display:block;animation:float 3s ease-in-out infinite}
+.msg{display:flex;gap:12px;padding:2px 8px;border-radius:12px;margin-top:14px;content-visibility:auto;contain-intrinsic-size:auto 56px}
+.msg.c{margin-top:0}.msg.in{animation:slideIn .2s ease-out}
+.msg:hover{background:var(--hov)}
 .msg .l{width:42px;flex:none;display:flex;justify-content:center}
 .msg .l .ts{display:none;font-size:11px;color:var(--mut);padding-top:5px}
 .msg.c:hover .ts{display:block}
@@ -120,72 +126,88 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--ink);-webkit-box-shadow:0 0
 .msg .top time{color:var(--mut);font-size:12px}
 .txt{white-space:pre-wrap;word-break:break-word;line-height:1.45}
 .txt.big{font-size:38px;line-height:1.25}
-.txt a{color:var(--acc2)}
+.txt a{color:#7fa8ff}
+.att{display:block;max-width:min(440px,100%);max-height:340px;border-radius:14px;margin-top:6px;background:#000;cursor:pointer}
+video.att{cursor:default;width:min(440px,100%)}
 .sys{text-align:center;color:var(--mut);font-size:13px;margin:14px 0 4px;font-weight:600}
-#typ{height:22px;padding:0 24px;font-size:12.5px;color:var(--mut);font-weight:600;flex:none}
-.comp{position:relative;display:flex;align-items:flex-end;gap:8px;margin:0 16px 16px;padding:8px;background:#fff;border:1.5px solid var(--line);border-radius:20px;flex:none}
-.comp:focus-within{border-color:var(--acc);box-shadow:0 0 0 3px rgba(43,140,255,.15)}
+#typ{height:22px;padding:0 24px;font-size:12.5px;color:var(--mut);font-weight:600;flex:none;display:flex;align-items:center;gap:6px}
+.dots{display:inline-flex;gap:3px}.dots i{width:5px;height:5px;border-radius:50%;background:var(--acc);animation:bounce 1.1s infinite}
+.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
+.comp{position:relative;display:flex;align-items:flex-end;gap:6px;margin:0 16px 16px;padding:8px;background:var(--p2);border:1.5px solid var(--line);border-radius:20px;flex:none;transition:border-color .15s,box-shadow .15s}
+.comp:focus-within{border-color:var(--acc);box-shadow:0 0 0 3px rgba(91,141,255,.16)}
 .comp textarea{border:0;box-shadow:none!important;resize:none;max-height:140px;padding:9px 8px;background:transparent;line-height:1.4}
-.comp .ib{font-size:22px;width:40px;height:40px}
-.comp .send{background:var(--acc);color:#fff;border-radius:14px;font-size:18px}
-.comp .send:hover{background:var(--acc2)}
-.emo{position:absolute;right:0;bottom:calc(100% + 10px);width:340px;max-width:calc(100vw - 40px);height:310px;background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 14px 44px rgba(20,90,170,.28);display:flex;flex-direction:column;z-index:30;overflow:hidden}
+.comp .ib{font-size:21px;width:40px;height:40px}
+.comp .send{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;border-radius:14px;font-size:17px}
+.comp .send:hover{transform:rotate(-12deg) scale(1.08)}
+.upl{margin:0 16px 8px;padding:10px 14px;background:var(--p2);border-radius:14px;font-size:13px;font-weight:700;animation:slideIn .2s}
+.pbar{height:6px;background:var(--p3);border-radius:6px;margin-top:8px;overflow:hidden}
+.pbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--acc),var(--acc2));transition:width .15s}
+.drop{position:absolute;inset:0;z-index:10;background:rgba(7,10,19,.8);display:none;place-items:center;font-size:22px;font-weight:800;border:3px dashed var(--acc);border-radius:20px;pointer-events:none}
+#main.dragging .drop{display:grid}
+.emo{position:absolute;right:0;bottom:calc(100% + 10px);width:340px;max-width:calc(100vw - 40px);height:310px;background:var(--p2);border:1px solid var(--line);border-radius:20px;box-shadow:0 14px 44px rgba(0,0,0,.55);display:flex;flex-direction:column;z-index:30;overflow:hidden;animation:pop .15s}
 .emo .et{display:flex;border-bottom:1px solid var(--line);padding:6px}
 .emo .et button{flex:1;font-size:20px;padding:4px;border-radius:10px}
-.emo .et button.on{background:rgba(43,140,255,.16)}
+.emo .et button.on{background:var(--sel)}
 .emo .eg{flex:1;overflow-y:auto;padding:8px;display:grid;grid-template-columns:repeat(8,1fr);gap:2px;align-content:start}
-.emo .eg button{font-size:23px;padding:4px 0;border-radius:9px}
-.emo .eg button:hover{background:rgba(43,140,255,.14);transform:scale(1.2)}
+.emo .eg button{font-size:23px;padding:4px 0;border-radius:9px;transition:transform .1s,background .1s}
+.emo .eg button:hover{background:var(--hov);transform:scale(1.25)}
+
+/* sağ profil paneli */
+.bnr{height:120px;background-size:cover;background-position:center;border-radius:20px 20px 0 0}
+#panel .pav{margin:-48px 0 0 16px;width:104px;height:104px;border-radius:50%;background:var(--p1);display:grid;place-items:center}
+#panel .pbody{padding:6px 16px 18px}
+.pn{font-size:21px;font-weight:800;word-break:break-word}
+.ps{color:var(--mut);font-size:13px;margin:2px 0 12px}
+.card{background:var(--p2);border-radius:14px;padding:12px 14px;margin-bottom:10px}
+.card b{display:block;font-size:12.5px;color:var(--mut);margin-bottom:5px}
+.card p{white-space:pre-wrap;word-break:break-word;line-height:1.4}
+.cg{display:flex;align-items:center;gap:9px;padding:5px 4px;border-radius:10px;cursor:pointer}.cg:hover{background:var(--hov)}
 
 /* modal */
-.ov{position:fixed;inset:0;z-index:50;background:rgba(10,45,90,.38);backdrop-filter:blur(4px);display:grid;place-items:center;padding:16px}
-.modal{width:min(440px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:26px;box-shadow:0 24px 70px rgba(10,45,90,.4);animation:pop .16s ease-out}
-@keyframes pop{from{transform:scale(.94);opacity:0}}
-.mh{display:flex;align-items:center;padding:18px 20px 6px;font-size:18px}.mh b{flex:1;font-family:'Baloo 2';font-size:22px;color:var(--acc2)}
-.x{width:32px;height:32px;border-radius:10px;color:var(--mut)}.x:hover{background:rgba(43,140,255,.12)}
+.ov{position:fixed;inset:0;z-index:50;background:rgba(3,5,12,.65);display:grid;place-items:center;padding:16px;animation:pop .12s}
+.modal{width:min(440px,100%);max-height:92vh;overflow:auto;background:var(--p1);border:1px solid var(--line);border-radius:26px;box-shadow:0 24px 70px rgba(0,0,0,.6);animation:pop .2s cubic-bezier(.2,.9,.3,1.2)}
+.mh{display:flex;align-items:center;padding:18px 20px 6px}.mh b{flex:1;font-family:'Baloo 2';font-size:22px}
+.x{width:32px;height:32px;border-radius:10px;color:var(--mut)}.x:hover{background:var(--hov);color:var(--ink)}
 .mb{padding:10px 20px 22px}
-.mb h4{margin:14px 0 8px;font-size:14px;color:var(--mut)}
+.mb h4{margin:14px 0 8px;font-size:13.5px;color:var(--mut)}
 .mb input,.mb textarea{margin-bottom:8px}
 .mb hr{border:0;border-top:1px solid var(--line);margin:18px 0 4px}
 .center{display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:8px}
 .btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
-.code{display:flex;align-items:center;gap:8px;background:rgba(43,140,255,.1);border-radius:12px;padding:8px 12px;font-weight:800;letter-spacing:1px;font-family:ui-monospace,monospace}
+.code{display:flex;align-items:center;gap:8px;background:var(--p2);border-radius:12px;padding:8px 12px;font-weight:800;letter-spacing:1px;font-family:ui-monospace,monospace}
 .code span{flex:1}
-.prof .banner{height:92px;margin:-10px -20px 0;border-radius:0}
-.prof .pav{margin:-42px 0 0 4px;width:92px;height:92px;border-radius:50%;background:#fff;display:grid;place-items:center}
-.prof .pn{font-size:22px;font-weight:800;margin-top:8px}
-.prof .pb{margin:10px 0 14px;padding:12px;background:rgba(43,140,255,.08);border-radius:14px;color:var(--ink);white-space:pre-wrap;word-break:break-word}
+.prof .bnr{margin:-10px -20px 0;border-radius:0;height:110px}
+.prof .pav{margin:-44px 0 0 2px;width:96px;height:96px;border-radius:50%;background:var(--p1);display:grid;place-items:center}
+.prof .pb{margin:10px 0 14px;padding:12px;background:var(--p2);border-radius:14px;white-space:pre-wrap;word-break:break-word}
+.lb{background:rgba(0,0,0,.88);cursor:zoom-out}.lb img{max-width:92vw;max-height:90vh;border-radius:12px}
 #toasts{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:90;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none}
-.toast{background:#fff;color:var(--ink);padding:11px 18px;border-radius:16px;font-weight:700;box-shadow:0 10px 30px rgba(10,45,90,.3);animation:pop .2s ease-out}
+.toast{background:var(--p3);color:var(--ink);padding:11px 18px;border-radius:16px;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,.5);animation:fadeUp .25s ease-out}
 .toast.err{background:var(--danger);color:#fff}
-#conn{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:#ffb020;color:#4a3000;font-weight:800;padding:8px 16px;border-radius:14px;z-index:90;display:none}
+#conn{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:#ffb020;color:#3a2600;font-weight:800;padding:8px 16px;border-radius:14px;z-index:90;display:none}
 #conn.on{display:block}
 
+@media(max-width:1100px){#panel{display:none}}
 @media(max-width:760px){
- #app{padding:8px;gap:8px}
- #rail{width:60px}.ri{width:44px;height:44px}
+ #app{padding:6px;gap:6px}
+ #rail{width:58px}.ri{width:44px;height:44px}
  #side{display:none}
- body.sideopen #side{display:flex;position:fixed;left:76px;top:8px;bottom:8px;z-index:20;width:min(270px,calc(100vw - 90px));box-shadow:0 20px 60px rgba(10,45,90,.4);background:rgba(255,255,255,.96)}
- .burger{display:block}
- .txt.big{font-size:32px}
+ body.sideopen #side{display:flex;position:fixed;left:70px;top:6px;bottom:6px;z-index:20;width:min(270px,calc(100vw - 84px));box-shadow:0 20px 60px rgba(0,0,0,.6)}
+ .burger{display:block}.txt.big{font-size:32px}
 }
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-<div class="sky">
- <div class="cloud" style="top:8%;width:170px;height:46px;--s:1.3;animation-duration:90s"></div>
- <div class="cloud" style="top:30%;width:140px;height:40px;--s:.9;animation-duration:130s;animation-delay:-60s"></div>
- <div class="cloud" style="top:58%;width:190px;height:50px;--s:1.6;animation-duration:160s;animation-delay:-100s"></div>
- <div class="cloud" style="top:80%;width:150px;height:42px;--s:1.1;animation-duration:110s;animation-delay:-30s"></div>
-</div>
 <div id="root"></div>
 <div id="toasts"></div>
 <div id="conn">Bağlantı koptu, yeniden bağlanıyor…</div>
 
 <script>
 const WS_URL = 'wss://efeciis.duckdns.org';
+const HTTP_BASE = WS_URL.replace(/^ws/, 'http'); // yükleme ve medya adresi (aynı sunucu)
+const mediaUrl = u => !u ? '' : (u.startsWith('/media/') ? HTTP_BASE + u : u);
 
-// ---------- küçük yardımcılar ----------
+// ---------- yardımcılar ----------
 const $ = s => document.querySelector(s);
 const root = $('#root');
 function h(tag, attrs, ...kids) {
@@ -218,9 +240,27 @@ let ws, token = localStorage.getItem('efecord_token');
 const S = {
   me: null, users: {}, chats: {}, friends: [], incoming: [], outgoing: [],
   view: { t: 'home', tab: 'online', chat: null },
-  unread: {}, typing: {}, drafts: {}, pending: null, openNext: false, gs: null, signedUp: false,
+  unread: {}, typing: {}, drafts: {}, pending: null, openNext: false, gs: null, signedUp: false, uploading: false,
 };
 const send = o => { if (ws && ws.readyState === 1) ws.send(JSON.stringify(o)); };
+
+// Çizim isteklerini birleştirip kareye bir kez çiz (kasmayı önler)
+const dirty = new Set(); let raf = 0;
+function mark(...k) { k.forEach(x => dirty.add(x)); if (!raf) raf = requestAnimationFrame(flush); }
+function flush() {
+  raf = 0; const d = new Set(dirty); dirty.clear();
+  if (!$('#app')) return;
+  if (d.has('rail')) renderRail();
+  if (d.has('side')) renderSide();
+  if (d.has('main')) renderMain();
+  else if (S.view.t === 'home') { if (d.has('home') && S.view.tab !== 'add') renderHome(); }
+  else {
+    if (d.has('header')) renderHeader();
+    if (d.has('msgs')) renderMsgs(d.has('fullmsgs'));
+    if (d.has('panel')) renderPanel();
+  }
+  if (d.has('gs')) fillGS();
+}
 
 // ---------- bağlantı ----------
 function connect() {
@@ -229,7 +269,6 @@ function connect() {
   ws.onmessage = e => { let m; try { m = JSON.parse(e.data); } catch { return; } handle(m); };
   ws.onclose = () => { $('#conn').classList.add('on'); setTimeout(connect, 2000); };
 }
-
 function handle(m) {
   switch (m.t) {
     case 'ready': {
@@ -239,29 +278,36 @@ function handle(m) {
       S.chats = {}; m.chats.forEach(c => S.chats[c.id] = c);
       if (!$('#app')) buildApp();
       if (S.view.chat && !S.chats[S.view.chat]) S.view = { t: 'home', tab: 'online', chat: null };
-      refreshAll();
-      if (S.signedUp) {
-        S.signedUp = false; const u = S.users[S.me];
-        toast(`Hoş geldin! Arkadaş kodun: ${u.name}#${u.tag} ☁️`);
-      }
+      mark('rail', 'side', 'main', 'gs');
+      if (S.signedUp) { S.signedUp = false; const u = S.users[S.me]; toast(`Hoş geldin! Arkadaş kodun: ${u.name}#${u.tag}`); }
       break;
     }
-    case 'users': m.users.forEach(u => S.users[u.id] = u); softRefresh(); break;
+    case 'users': {
+      let visual = false;
+      m.users.forEach(u => {
+        const o = S.users[u.id];
+        if (o && (o.name !== u.name || o.avatar !== u.avatar || o.color !== u.color)) visual = true;
+        S.users[u.id] = u;
+      });
+      mark('rail', 'side', 'header', 'panel', 'gs', 'home');
+      if (visual) mark('msgs', 'fullmsgs');
+      break;
+    }
     case 'friends':
       S.friends = m.friends; S.incoming = m.incoming; S.outgoing = m.outgoing;
-      renderRail(); renderSide(); if (S.view.t === 'home') renderHome(); fillGS(); break;
+      mark('rail', 'side', 'home', 'gs'); break;
     case 'chat': {
       const c = m.chat, old = S.chats[c.id];
       if (c.msgs == null) c.msgs = old ? old.msgs : [];
       S.chats[c.id] = c;
       if (S.pending === c.id) { S.pending = null; go({ t: 'chat', chat: c.id }); }
       else if (!old && S.openNext && c.type === 'group') { S.openNext = false; go({ t: 'chat', chat: c.id }); }
-      else softRefresh();
+      else mark('rail', 'side', 'header', 'panel', 'gs');
       break;
     }
     case 'chat_removed':
       delete S.chats[m.chat]; delete S.unread[m.chat];
-      if (S.view.chat === m.chat) go({ t: 'home', tab: 'online', chat: null }); else softRefresh();
+      if (S.view.chat === m.chat) go({ t: 'home', tab: 'online', chat: null }); else mark('rail', 'side', 'gs');
       break;
     case 'msg': {
       const c = S.chats[m.chat]; if (!c) return;
@@ -269,8 +315,7 @@ function handle(m) {
       if (S.typing[m.chat]) delete S.typing[m.chat][m.msg.a];
       const viewing = S.view.chat === m.chat;
       if (!viewing && m.msg.a !== S.me && !m.msg.sys) S.unread[m.chat] = (S.unread[m.chat] || 0) + 1;
-      renderRail(); renderSide();
-      if (viewing) { renderMsgs(); renderTyping(); }
+      mark('rail', 'side'); if (viewing) { mark('msgs'); renderTyping(); }
       break;
     }
     case 'typing':
@@ -315,57 +360,107 @@ function showAuth() {
       setTimeout(() => { btn.disabled = false; }, 4000);
     }
   }, h('div', { class: 'seg' }, tl, ts), un, h('div', { class: 'pwrow' }, pw, eye), msg, btn, hint);
-  root.append(h('div', { class: 'authwrap' }, h('div', { class: 'auth' }, h('div', { class: 'logo' }, 'Efecord ☁️', h('small', {}, 'gökyüzü kadar geniş sohbet')), form)));
+  root.append(h('div', { class: 'authwrap' }, h('div', { class: 'aur' }),
+    h('div', { class: 'auth' }, h('div', { class: 'logo' }, 'Efecord', h('small', {}, 'arkadaşlarınla yaz, çiz, izle')), form)));
   setMode('login'); un.focus();
 }
 
-// ---------- avatar yardımcıları ----------
+// ---------- avatar / banner ----------
+const safeUrl = u => u && !/["')\\\s]/.test(u);
 function av(u, px = 40, dot = false, square = false) {
   const d = h('div', { class: 'av' + (square ? ' sq' : ''), style: `width:${px}px;height:${px}px;font-size:${Math.round(px * .42)}px` });
-  if (u && u.avatar) d.append(h('img', { src: u.avatar, alt: '' }));
-  else { d.style.background = (u && u.color) || '#4aa8ff'; d.textContent = ((u && u.name) || '?')[0].toUpperCase(); }
+  if (u && u.avatar) d.append(h('img', { src: mediaUrl(u.avatar), alt: '', loading: 'lazy', decoding: 'async' }));
+  else { d.style.background = (u && u.color) || '#5b8dff'; d.textContent = ((u && u.name) || '?')[0].toUpperCase(); }
   if (dot) d.append(h('i', { class: 'dot' + (u && u.online ? ' on' : '') }));
   return d;
 }
-function pickImage(file, cb) {
-  if (!file) return;
-  if (!/^image\//.test(file.type)) return toast('Sadece resim dosyası seçebilirsin', 'err');
-  if (/gif|webp/.test(file.type)) { // hareketli resimler olduğu gibi gider
-    if (file.size > 1.5 * 1024 * 1024) return toast('GIF/WebP en fazla 1.5 MB olabilir', 'err');
-    const r = new FileReader(); r.onload = () => cb(r.result); r.readAsDataURL(file); return;
-  }
-  const img = new Image(), url = URL.createObjectURL(file);
-  img.onload = () => {
-    const s = 256, c = document.createElement('canvas'); c.width = c.height = s;
-    const m = Math.min(img.width, img.height);
-    c.getContext('2d').drawImage(img, (img.width - m) / 2, (img.height - m) / 2, m, m, 0, 0, s, s);
-    URL.revokeObjectURL(url);
-    cb(c.toDataURL(file.type === 'image/png' ? 'image/png' : 'image/jpeg', .9));
-  };
-  img.onerror = () => toast('Resim okunamadı', 'err');
-  img.src = url;
-}
-function fileBtn(label, onData, cls = 'btn alt sm') {
-  const inp = h('input', { type: 'file', accept: 'image/*', style: 'display:none', onchange: () => { pickImage(inp.files[0], onData); inp.value = ''; } });
-  return h('span', {}, inp, h('button', { class: cls, type: 'button', onclick: () => inp.click() }, label));
+function setBanner(el, u) {
+  if (u && u.banner && safeUrl(u.banner)) el.style.backgroundImage = `url("${mediaUrl(u.banner)}")`;
+  else el.style.background = `linear-gradient(135deg,${(u && u.color) || '#5b8dff'},#1d2644)`;
 }
 
-// ---------- uygulama iskeleti ----------
+// ---------- yükleme ----------
+function upload(file, onprog) {
+  return new Promise((res, rej) => {
+    const x = new XMLHttpRequest();
+    x.open('POST', HTTP_BASE + '/upload');
+    x.setRequestHeader('Authorization', 'Bearer ' + token);
+    x.setRequestHeader('Content-Type', file.type || 'application/octet-stream');
+    x.upload.onprogress = e => { if (onprog && e.lengthComputable) onprog(e.loaded / e.total); };
+    x.onload = () => {
+      let j = {}; try { j = JSON.parse(x.responseText); } catch {}
+      x.status === 200 ? res(j) : rej(new Error(j.error || 'Yükleme başarısız'));
+    };
+    x.onerror = () => rej(new Error('Sunucuya ulaşılamadı (nginx boyut sınırını kontrol et)'));
+    x.send(file);
+  });
+}
+// png/jpeg'i istenen boyuta kırp-küçült; gif/webp animasyon bozulmasın diye olduğu gibi gider
+function prep(file, w, hh) {
+  if (!/^image\/(png|jpeg)$/.test(file.type)) return Promise.resolve(file);
+  return new Promise((res, rej) => {
+    const img = new Image(), url = URL.createObjectURL(file);
+    img.onload = () => {
+      const c = document.createElement('canvas'); c.width = w; c.height = hh;
+      const sc = Math.max(w / img.width, hh / img.height), dw = img.width * sc, dh = img.height * sc;
+      c.getContext('2d').drawImage(img, (w - dw) / 2, (hh - dh) / 2, dw, dh);
+      URL.revokeObjectURL(url);
+      c.toBlob(b => b ? res(b) : rej(new Error('Resim okunamadı')), file.type, .9);
+    };
+    img.onerror = () => rej(new Error('Resim okunamadı'));
+    img.src = url;
+  });
+}
+function fileBtn(label, cb, w, hh) {
+  const inp = h('input', {
+    type: 'file', accept: 'image/*', style: 'display:none',
+    onchange: async () => {
+      const f = inp.files[0]; inp.value = ''; if (!f) return;
+      if (!/^image\//.test(f.type)) return toast('Sadece resim / GIF seçebilirsin', 'err');
+      if (f.size > 8 * 1048576) return toast('En fazla 8 MB olabilir', 'err');
+      try { toast('Yükleniyor…'); const j = await upload(await prep(f, w, hh)); cb(j.url); }
+      catch (e) { toast(e.message, 'err'); }
+    }
+  });
+  return h('span', {}, inp, h('button', { class: 'btn alt sm', type: 'button', onclick: () => inp.click() }, label));
+}
+async function sendFile(file) {
+  const c = S.chats[S.view.chat]; if (!c) return;
+  const isV = /^video\//.test(file.type), isI = /^image\//.test(file.type);
+  if (!isV && !isI) return toast('Sadece resim, GIF veya video gönderebilirsin', 'err');
+  if (isV && file.size > 50 * 1048576) return toast('Video en fazla 50 MB olabilir', 'err');
+  if (isI && file.size > 8 * 1048576) return toast('Resim en fazla 8 MB olabilir', 'err');
+  if (S.uploading) return toast('Önce devam eden yüklemenin bitmesini bekle', 'err');
+  S.uploading = true;
+  const bar = h('i'), box = h('div', { class: 'upl' }, (isV ? '🎬 ' : '🖼️ ') + file.name, h('div', { class: 'pbar' }, bar));
+  const main = $('#main'), comp = main && main.querySelector('.comp');
+  if (comp) main.insertBefore(box, comp);
+  try {
+    const j = await upload(file, p => { bar.style.width = Math.round(p * 100) + '%'; });
+    const ta = main && main.querySelector('.comp textarea');
+    const text = ta && S.view.chat === c.id ? ta.value.trim() : '';
+    if (text) { ta.value = ''; S.drafts[c.id] = ''; }
+    send({ t: 'send', chat: c.id, text, file: { url: j.url } });
+  } catch (e) { toast(e.message, 'err'); }
+  box.remove(); S.uploading = false;
+}
+function lightbox(src) {
+  const ov = h('div', { class: 'ov lb', onclick: () => ov.remove() }, h('img', { src, alt: '' }));
+  document.body.append(ov);
+}
+
+// ---------- iskelet ----------
 function buildApp() {
   root.innerHTML = '';
-  root.append(h('div', { id: 'app' }, h('nav', { id: 'rail' }), h('aside', { id: 'side' }), h('main', { id: 'main' })));
+  root.append(h('div', { id: 'app' },
+    h('nav', { id: 'rail', class: 'pn1' }), h('aside', { id: 'side', class: 'pn1' }),
+    h('main', { id: 'main', class: 'pn1' }), h('aside', { id: 'panel', class: 'pn1 hide' })));
   document.addEventListener('click', e => { const p = $('.emo'); if (p && !p.contains(e.target) && !e.target.closest('.emobtn')) p.remove(); });
-}
-function refreshAll() { renderRail(); renderSide(); renderMain(); fillGS(); }
-function softRefresh() {
-  renderRail(); renderSide();
-  if (S.view.t === 'home') renderHome(); else { renderHeader(); renderMsgs(); }
-  fillGS();
 }
 function go(view) {
   if (view.t === 'chat') S.unread[view.chat] = 0;
   S.view = view; document.body.classList.remove('sideopen');
-  renderRail(); renderSide(); renderMain();
+  mark('rail', 'side', 'main');
 }
 function openDm(uid) {
   const id = dmIdOf(S.me, uid);
@@ -383,10 +478,11 @@ function ri(content, title, on, badge, onclick, extra = '') {
 function renderRail() {
   const r = $('#rail'); if (!r) return; r.innerHTML = '';
   const dmUnread = Object.entries(S.unread).filter(([id, n]) => n && S.chats[id] && S.chats[id].type === 'dm').reduce((a, [, n]) => a + n, 0);
-  r.append(ri('☁️', 'Ana sayfa', S.view.t === 'home' || (S.chats[S.view.chat] || {}).type === 'dm', dmUnread + S.incoming.length, () => go({ t: 'home', tab: 'online', chat: null })));
+  const inDm = S.view.t === 'home' || (S.chats[S.view.chat] || {}).type === 'dm';
+  r.append(ri('E', 'Ana sayfa', inDm, dmUnread + S.incoming.length, () => go({ t: 'home', tab: 'online', chat: null })));
   r.append(h('div', { class: 'rsep' }));
   Object.values(S.chats).filter(c => c.type === 'group').sort((a, b) => a.name.localeCompare(b.name, 'tr')).forEach(c => {
-    const icon = c.icon ? h('img', { src: c.icon, alt: '' }) : (c.name[0] || '?').toUpperCase();
+    const icon = c.icon ? h('img', { src: mediaUrl(c.icon), alt: '', decoding: 'async' }) : (c.name[0] || '?').toUpperCase();
     r.append(ri(icon, c.name, S.view.chat === c.id, S.unread[c.id] || 0, () => go({ t: 'chat', chat: c.id })));
   });
   r.append(ri('＋', 'Grup oluştur / katıl', false, 0, openPlus, 'add'));
@@ -400,10 +496,10 @@ function renderSide() {
   const c = S.chats[S.view.chat];
   const inGroup = S.view.t === 'chat' && c && c.type === 'group';
   if (!inGroup) {
-    s.append(h('div', { class: 'sh' }, h('span', { class: 'nm' }, 'Efecord ☁️')));
+    s.append(h('div', { class: 'sh' }, h('span', { class: 'nm' }, 'Efecord')));
     const list = h('div', { class: 'sl' });
     list.append(h('div', { class: 'it' + (S.view.t === 'home' ? ' on' : ''), onclick: () => go({ t: 'home', tab: 'online', chat: null }) },
-      h('span', { style: 'font-size:22px;width:36px;text-align:center' }, '👥'), h('span', { class: 't' }, 'Arkadaşlar'),
+      h('span', { style: 'font-size:21px;width:36px;text-align:center' }, '👥'), h('span', { class: 't' }, 'Arkadaşlar'),
       S.incoming.length ? h('span', { class: 'bd' }, S.incoming.length) : null));
     list.append(h('div', { class: 'lbl' }, 'Direkt mesajlar'));
     const dms = Object.values(S.chats).filter(x => x.type === 'dm').sort((a, b) => lastTs(b) - lastTs(a));
@@ -431,11 +527,13 @@ function renderSide() {
 }
 
 // ---------- ana alan ----------
+const R = { chat: null, lastId: null, prev: null }; // artımlı mesaj çizimi için
 function renderMain() {
   const m = $('#main'); if (!m) return;
+  m.classList.remove('vin'); void m.offsetWidth; m.classList.add('vin');
   if (S.view.t === 'home') return renderHome();
   const c = S.chats[S.view.chat]; if (!c) return go({ t: 'home', tab: 'online', chat: null });
-  m.innerHTML = '';
+  m.innerHTML = ''; R.chat = null;
   const ta = h('textarea', { rows: 1, placeholder: 'Mesaj yaz…', maxlength: 2000 });
   ta.value = S.drafts[c.id] || '';
   let lastType = 0;
@@ -449,11 +547,24 @@ function renderMain() {
     if (Date.now() - lastType > 2000) { lastType = Date.now(); send({ t: 'typing', chat: c.id }); }
   });
   ta.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); doSend(); } });
-  const comp = h('div', { class: 'comp' }, ta,
+  ta.addEventListener('paste', e => {
+    const f = [...(e.clipboardData ? e.clipboardData.files : [])].find(x => /^(image|video)\//.test(x.type));
+    if (f) { e.preventDefault(); sendFile(f); }
+  });
+  const fin = h('input', { type: 'file', accept: 'image/*,video/*', style: 'display:none', onchange: () => { const f = fin.files[0]; fin.value = ''; if (f) sendFile(f); } });
+  const comp = h('div', { class: 'comp' }, fin,
+    h('button', { class: 'ib', title: 'Resim / GIF / video gönder', onclick: () => fin.click() }, '📎'),
+    ta,
     h('button', { class: 'ib emobtn', title: 'Emoji', onclick: () => toggleEmoji(comp, ta) }, '😊'),
     h('button', { class: 'ib send', title: 'Gönder', onclick: doSend }, '➤'));
-  m.append(h('div', { class: 'hd', id: 'hd' }), h('div', { id: 'msgs' }), h('div', { id: 'typ' }), comp);
-  renderHeader(); renderMsgs(); renderTyping(); grow();
+  m.append(h('div', { class: 'hd', id: 'hd' }), h('div', { id: 'msgs' }), h('div', { id: 'typ' }), comp, h('div', { class: 'drop' }, '📎 Bırak, gönderelim'));
+  // sürükle-bırak
+  let depth = 0;
+  m.ondragenter = e => { e.preventDefault(); depth++; m.classList.add('dragging'); };
+  m.ondragleave = () => { if (--depth <= 0) { depth = 0; m.classList.remove('dragging'); } };
+  m.ondragover = e => e.preventDefault();
+  m.ondrop = e => { e.preventDefault(); depth = 0; m.classList.remove('dragging'); const f = e.dataTransfer.files[0]; if (f) sendFile(f); };
+  renderHeader(); renderMsgs(true); renderTyping(); renderPanel(); grow();
   if (!matchMedia('(max-width:760px)').matches) ta.focus();
 }
 function renderHeader() {
@@ -464,44 +575,82 @@ function renderHeader() {
     hd.append(av(u, 38, true), h('div', { class: 'grow' }, h('b', { class: 'tt' }, u ? u.name : '?', u ? h('span', { class: 'tg' }, '#' + u.tag) : null), h('div', { class: 'sub' }, u && u.online ? '🟢 Çevrimiçi' : '⚪ Çevrimdışı')));
     if (u) hd.append(h('button', { class: 'ib', title: 'Profil', onclick: () => showProfile(u.id) }, '👤'));
   } else {
-    const ic = { name: c.name, avatar: c.icon, color: '#2b8cff' };
-    hd.append(av(ic, 38, false, true), h('div', { class: 'grow' }, h('b', { class: 'tt' }, c.name), h('div', { class: 'sub' }, `👥 ${c.members.length} üye`)),
+    hd.append(av({ name: c.name, avatar: c.icon, color: '#5b8dff' }, 38, false, true), h('div', { class: 'grow' }, h('b', { class: 'tt' }, c.name), h('div', { class: 'sub' }, `👥 ${c.members.length} üye`)),
       h('button', { class: 'ib', title: 'Üye ekle', onclick: () => openGroupSettings(c.id) }, '➕'),
       h('button', { class: 'ib', title: 'Grup ayarları', onclick: () => openGroupSettings(c.id) }, '⚙️'));
   }
 }
 const EMOJI_ONLY = /^(?:\p{Extended_Pictographic}|\p{Emoji_Modifier}|\u200d|\ufe0f|\s)+$/u;
-function rich(text) {
-  return text.split(/(https?:\/\/[^\s<]+)/g).map((p, i) => i % 2 ? h('a', { href: p, target: '_blank', rel: 'noopener noreferrer' }, p) : p);
-}
-function renderMsgs() {
-  const box = $('#msgs'), c = S.chats[S.view.chat]; if (!box || !c) return;
-  const near = !box.dataset.init || box.scrollHeight - box.scrollTop - box.clientHeight < 140;
-  box.innerHTML = ''; box.dataset.init = 1;
-  const first = c.type === 'dm'
-    ? h('div', { class: 'start' }, h('span', { class: 'e' }, '👋'), `${chatTitle(c)} ile sohbetinin başı`)
-    : h('div', { class: 'start' }, h('span', { class: 'e' }, '☁️'), `${c.name} grubuna hoş geldin!`);
-  box.append(first);
-  let last = null;
-  for (const m of c.msgs) {
-    if (m.sys) { box.append(h('div', { class: 'sys' }, m.t)); last = null; continue; }
-    const u = S.users[m.a], cont = last && last.a === m.a && m.ts - last.ts < 300000;
-    const big = m.t.length < 30 && EMOJI_ONLY.test(m.t);
-    const left = cont ? h('div', { class: 'l' }, h('span', { class: 'ts' }, new Date(m.ts).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })))
-      : h('div', { class: 'l', style: 'cursor:pointer', onclick: () => showProfile(m.a) }, av(u, 42));
-    const right = h('div', { class: 'r' },
-      cont ? null : h('div', { class: 'top' }, h('b', { style: `color:${(u && u.color) || '#2b8cff'}`, onclick: () => showProfile(m.a) }, u ? u.name : 'Bilinmeyen'), h('time', {}, fmt(m.ts))),
-      h('div', { class: 'txt' + (big ? ' big' : '') }, rich(m.t)));
-    box.append(h('div', { class: 'msg' + (cont ? ' c' : '') }, left, right));
-    last = m;
+const rich = text => text.split(/(https?:\/\/[^\s<]+)/g).map((p, i) => i % 2 ? h('a', { href: p, target: '_blank', rel: 'noopener noreferrer' }, p) : p);
+
+function msgNode(m, prev, box, stick, animate) {
+  const u = S.users[m.a], cont = prev && !prev.sys && prev.a === m.a && m.ts - prev.ts < 300000;
+  const big = m.t && m.t.length < 30 && EMOJI_ONLY.test(m.t);
+  const keep = () => { if (stick) box.scrollTop = box.scrollHeight; };
+  let att = null;
+  if (m.f) {
+    const src = mediaUrl(m.f.url);
+    if (m.f.k === 'video') { att = h('video', { class: 'att', src, controls: true, preload: 'metadata', playsinline: true }); att.addEventListener('loadedmetadata', keep); }
+    else { att = h('img', { class: 'att', src, loading: 'lazy', decoding: 'async', alt: '', onclick: () => lightbox(src) }); att.addEventListener('load', keep); }
   }
+  const left = cont
+    ? h('div', { class: 'l' }, h('span', { class: 'ts' }, new Date(m.ts).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })))
+    : h('div', { class: 'l', style: 'cursor:pointer', onclick: () => showProfile(m.a) }, av(u, 42));
+  const right = h('div', { class: 'r' },
+    cont ? null : h('div', { class: 'top' }, h('b', { style: `color:${(u && u.color) || '#7fa8ff'}`, onclick: () => showProfile(m.a) }, u ? u.name : 'Bilinmeyen'), h('time', {}, fmt(m.ts))),
+    m.t ? h('div', { class: 'txt' + (big ? ' big' : '') }, rich(m.t)) : null, att);
+  return h('div', { class: 'msg' + (cont ? ' c' : '') + (animate ? ' in' : '') }, left, right);
+}
+function renderMsgs(full) {
+  const box = $('#msgs'), c = S.chats[S.view.chat]; if (!box || !c) return;
+  let start = 0;
+  if (!full && R.chat === c.id && R.lastId) {
+    let i = c.msgs.length - 1; while (i >= 0 && c.msgs[i].id !== R.lastId) i--;
+    if (i < 0) full = true; else start = i + 1;
+  } else full = true;
+  const near = full || box.scrollHeight - box.scrollTop - box.clientHeight < 160;
+  if (full) {
+    box.innerHTML = ''; R.prev = null;
+    box.append(c.type === 'dm'
+      ? h('div', { class: 'start' }, h('span', { class: 'e' }, '👋'), `${chatTitle(c)} ile sohbetinin başı`)
+      : h('div', { class: 'start' }, h('span', { class: 'e' }, '☁️'), `${c.name} grubuna hoş geldin!`));
+  }
+  const frag = document.createDocumentFragment();
+  for (let i = start; i < c.msgs.length; i++) {
+    const m = c.msgs[i];
+    if (m.sys) { frag.append(h('div', { class: 'sys' }, m.t)); R.prev = m; continue; }
+    frag.append(msgNode(m, R.prev, box, near, !full)); R.prev = m;
+  }
+  box.append(frag);
+  R.chat = c.id; R.lastId = c.msgs.length ? c.msgs[c.msgs.length - 1].id : null;
   if (near) box.scrollTop = box.scrollHeight;
 }
 function renderTyping() {
   const el = $('#typ'); if (!el) return;
   const t = S.typing[S.view.chat] || {}, now = Date.now();
   const names = Object.keys(t).filter(id => now - t[id] < 3200 && id !== S.me).map(id => (S.users[id] || {}).name || '?');
-  el.textContent = names.length ? (names.length > 2 ? 'Birkaç kişi yazıyor…' : names.join(' ve ') + ' yazıyor…') : '';
+  el.textContent = '';
+  if (names.length) el.append(h('span', { class: 'dots' }, h('i'), h('i'), h('i')), names.length > 2 ? 'Birkaç kişi yazıyor…' : names.join(' ve ') + ' yazıyor…');
+}
+
+// ---------- DM sağ profil paneli ----------
+function renderPanel() {
+  const p = $('#panel'); if (!p) return;
+  const c = S.chats[S.view.chat];
+  const u = S.view.t === 'chat' && c && c.type === 'dm' ? otherOf(c) : null;
+  if (!u) { p.className = 'pn1 hide'; p.innerHTML = ''; return; }
+  const fresh = p.dataset.uid !== u.id; p.dataset.uid = u.id;
+  p.className = 'pn1'; p.innerHTML = '';
+  const bn = h('div', { class: 'bnr' }); setBanner(bn, u);
+  const common = Object.values(S.chats).filter(x => x.type === 'group' && x.members.includes(u.id) && x.members.includes(S.me));
+  p.append(bn, h('div', { class: 'pav' }, av(u, 92, true)),
+    h('div', { class: 'pbody' },
+      h('div', { class: 'pn' }, u.name, h('span', { class: 'tg' }, '#' + u.tag)),
+      h('div', { class: 'ps' }, u.online ? '🟢 Çevrimiçi' : '⚪ Çevrimdışı'),
+      h('div', { class: 'card' }, h('b', {}, 'Hakkında'), h('p', {}, u.bio || 'Henüz bir şey yazmamış.')),
+      h('div', { class: 'card' }, h('b', {}, 'Efecord üyesi'), h('p', {}, u.created ? new Date(u.created).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }) : '—')),
+      common.length ? h('div', { class: 'card' }, h('b', {}, `Ortak gruplar — ${common.length}`), common.map(g => h('div', { class: 'cg', onclick: () => go({ t: 'chat', chat: g.id }) }, av({ name: g.name, avatar: g.icon, color: '#5b8dff' }, 26, false, true), g.name))) : null));
+  if (fresh) { p.style.animation = 'none'; void p.offsetWidth; p.style.animation = ''; }
 }
 
 // ---------- emoji seçici ----------
@@ -535,6 +684,7 @@ function toggleEmoji(comp, ta) {
 // ---------- ana sayfa (arkadaşlar) ----------
 function renderHome() {
   const m = $('#main'); if (!m) return; m.innerHTML = '';
+  const p = $('#panel'); if (p) { p.className = 'pn1 hide'; p.innerHTML = ''; }
   const tab = S.view.tab || 'online';
   const T = (k, l, cls = '') => h('button', { class: `tab ${cls} ${tab === k ? 'on' : ''}`, onclick: () => { S.view.tab = k; renderHome(); } }, l);
   m.append(h('div', { class: 'hd' },
@@ -569,7 +719,7 @@ function renderHome() {
     const go1 = () => { if (inp.value.trim()) { send({ t: 'add_friend', tag: inp.value }); inp.value = ''; } };
     inp.addEventListener('keydown', e => { if (e.key === 'Enter') go1(); });
     const me = S.users[S.me];
-    body.append(h('h3', { style: 'font-family:"Baloo 2";font-size:22px;color:var(--acc2)' }, 'Arkadaş ekle 💌'),
+    body.append(h('h3', { style: 'font-family:"Baloo 2";font-size:22px' }, 'Arkadaş ekle 💌'),
       h('p', { style: 'color:var(--mut);margin:4px 0' }, 'Arkadaşının kullanıcı adını ve 4 haneli kodunu yaz.'),
       h('div', { class: 'addbox' }, inp, h('button', { class: 'btn', style: 'white-space:nowrap', onclick: go1 }, 'İstek gönder')),
       h('p', { style: 'margin-top:22px;color:var(--mut)' }, 'Senin kodun: ', h('b', { style: 'color:var(--ink)' }, `${me.name}#${me.tag}`)));
@@ -590,7 +740,7 @@ function openPlus() {
   const cd = h('input', { placeholder: 'Davet kodu', maxlength: 20 });
   let ov;
   const body = h('div', {},
-    h('h4', {}, '☁️ Yeni grup oluştur'), nm,
+    h('h4', {}, '✨ Yeni grup oluştur'), nm,
     h('button', { class: 'btn', onclick: () => { S.openNext = true; send({ t: 'create_group', name: nm.value }); ov.remove(); } }, 'Oluştur'),
     h('hr'), h('h4', {}, '🔑 Gruba katıl'), cd,
     h('button', { class: 'btn alt', onclick: () => { if (!cd.value.trim()) return; S.openNext = true; send({ t: 'join_group', code: cd.value }); ov.remove(); } }, 'Katıl'));
@@ -598,22 +748,25 @@ function openPlus() {
 }
 
 function openSettings() {
-  const u = S.users[S.me]; let pa; // undefined: değişmedi, '': kaldır
-  const prev = h('div', { class: 'center' });
-  const draw = () => { prev.innerHTML = ''; prev.append(av({ ...u, avatar: pa === undefined ? u.avatar : pa }, 96)); };
-  draw();
+  const u = S.users[S.me]; let pa, pb; // undefined: değişmedi, '': kaldır
+  const prevB = h('div', { class: 'bnr', style: 'height:110px;border-radius:16px' }), prevA = h('div', { class: 'center' });
+  const col = h('input', { type: 'color', value: u.color, style: 'height:44px;padding:4px', oninput: () => draw() });
+  const draw = () => {
+    setBanner(prevB, { banner: pb === undefined ? u.banner : pb, color: col.value });
+    prevA.innerHTML = ''; prevA.append(av({ ...u, color: col.value, avatar: pa === undefined ? u.avatar : pa }, 84));
+  };
   const nm = h('input', { value: u.name, maxlength: 20, placeholder: 'Kullanıcı adı' });
   const bio = h('textarea', { rows: 3, maxlength: 190, placeholder: 'Hakkında bir şeyler yaz…' }); bio.value = u.bio || '';
-  const col = h('input', { type: 'color', value: u.color, style: 'height:44px;padding:4px' });
   let ov;
-  const body = h('div', {}, prev,
-    h('div', { class: 'btns', style: 'justify-content:center;margin-bottom:10px' },
-      fileBtn('🖼️ Resim / GIF yükle', d => { pa = d; draw(); }), h('button', { class: 'btn alt sm', onclick: () => { pa = ''; draw(); } }, 'Kaldır')),
-    h('h4', {}, 'Kullanıcı adı (kodun: #' + u.tag + ')'), nm, h('h4', {}, 'Hakkında'), bio, h('h4', {}, 'Renk'), col,
+  const body = h('div', {}, prevB,
+    h('div', { class: 'btns', style: 'margin-bottom:12px' }, fileBtn('🎞️ Banner (GIF olur)', d => { pb = d; draw(); }, 1200, 400), h('button', { class: 'btn alt sm', onclick: () => { pb = ''; draw(); } }, 'Banner kaldır')),
+    prevA,
+    h('div', { class: 'btns', style: 'justify-content:center;margin-bottom:10px' }, fileBtn('🖼️ Profil resmi / GIF', d => { pa = d; draw(); }, 512, 512), h('button', { class: 'btn alt sm', onclick: () => { pa = ''; draw(); } }, 'Kaldır')),
+    h('h4', {}, 'Kullanıcı adı (etiketin: #' + u.tag + ')'), nm, h('h4', {}, 'Hakkında'), bio, h('h4', {}, 'Renk (resim yoksa kullanılır)'), col,
     h('div', { class: 'btns' },
-      h('button', { class: 'btn', onclick: () => { const o = { t: 'profile', name: nm.value, bio: bio.value, color: col.value }; if (pa !== undefined) o.avatar = pa; send(o); ov.remove(); } }, 'Kaydet'),
+      h('button', { class: 'btn', onclick: () => { const o = { t: 'profile', name: nm.value, bio: bio.value, color: col.value }; if (pa !== undefined) o.avatar = pa; if (pb !== undefined) o.banner = pb; send(o); ov.remove(); } }, 'Kaydet'),
       h('button', { class: 'btn danger', onclick: () => { send({ t: 'logout' }); localStorage.removeItem('efecord_token'); location.reload(); } }, 'Çıkış yap')));
-  ov = modal('Profilim', body);
+  draw(); ov = modal('Profilim', body);
 }
 
 function showProfile(id) {
@@ -627,12 +780,10 @@ function showProfile(id) {
     else if (S.outgoing.includes(id)) acts.push(h('span', { style: 'color:var(--mut);align-self:center;font-weight:700' }, '⏳ İstek gönderildi'));
     else if (!fr) acts.push(h('button', { class: 'btn alt', onclick: () => { send({ t: 'add_friend', tag: u.name + '#' + u.tag }); ov.remove(); } }, '➕ Arkadaş ekle'));
   }
-  const body = h('div', { class: 'prof' },
-    h('div', { class: 'banner', style: `background:linear-gradient(135deg,${u.color},#cfeaff)` }),
-    h('div', { class: 'pav' }, av(u, 84, true)),
+  const bn = h('div', { class: 'bnr' }); setBanner(bn, u);
+  ov = modal('Profil', h('div', { class: 'prof' }, bn, h('div', { class: 'pav' }, av(u, 84, true)),
     h('div', { class: 'pn' }, u.name, h('span', { class: 'tg' }, '#' + u.tag)),
-    h('div', { class: 'pb' }, u.bio || 'Henüz bir şey yazmamış ☁️'), h('div', { class: 'btns' }, acts));
-  ov = modal('Profil', body);
+    h('div', { class: 'pb' }, u.bio || 'Henüz bir şey yazmamış.'), h('div', { class: 'btns' }, acts)));
 }
 
 function openGroupSettings(id) {
@@ -649,8 +800,8 @@ function fillGS() {
   const rename = () => { if (nm.value.trim() && nm.value.trim() !== c.name) send({ t: 'rename_group', chat: id, name: nm.value }); };
   nm.addEventListener('keydown', e => { if (e.key === 'Enter') rename(); });
   body.append(
-    h('div', { class: 'center' }, av({ name: c.name, avatar: c.icon, color: '#2b8cff' }, 92, false, true),
-      h('div', { class: 'btns' }, fileBtn('🖼️ Resim / GIF', d => send({ t: 'group_icon', chat: id, icon: d })),
+    h('div', { class: 'center' }, av({ name: c.name, avatar: c.icon, color: '#5b8dff' }, 92, false, true),
+      h('div', { class: 'btns' }, fileBtn('🖼️ Resim / GIF', url => send({ t: 'group_icon', chat: id, icon: url }), 512, 512),
         c.icon ? h('button', { class: 'btn alt sm', onclick: () => send({ t: 'group_icon', chat: id, icon: '' }) }, 'Kaldır') : null)),
     h('h4', {}, 'Grup adı'), nm, h('button', { class: 'btn sm', onclick: rename }, 'Adı değiştir'),
     h('h4', {}, 'Davet kodu'),
